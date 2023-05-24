@@ -25,9 +25,12 @@ public class Guia4Extra {
         do {
             System.out.println(" *************** MENU ***************** \n"
                     + " 1 ---- Alquiler de Amarres segun el Bote  \n"
-                    + " 2 ---- Electrodomestico y sus precios   \n"
+                    + " 2 ---- Calculemos el Costo de un Viaje   \n"
                     + " S ---- Salir \n");
             vResp = JOptionPane.showInputDialog("Que Opcion Elijes, S Sale");
+            if (vResp == null){
+                vResp = "S";
+            }
             switch (vResp) {
                 case "1":
                     Yate yate = new Yate(15, 100, "DJX380",50, LocalDate.now());
@@ -41,6 +44,16 @@ public class Guia4Extra {
                     System.out.println("El costo del Amarre"+ amarre3.getPosicion()+ " " + amarre3.getNombre() + " es de: " + velero.calculeAlquiler(amarre3.getDesde(), amarre3.getHasta()));
                     break;
                 case "2":
+                    Combustible diesel = new Combustible("Infinia Diesel", 300);
+                    Combustible nafta = new Combustible("Nafta Super", 250);
+                    Auto auto = new Auto("Renault Logan", "DLX380", nafta, 100, 7);
+                    Camioneta camioneta = new Camioneta("Renault Kangoo", "DLX380", diesel, 100, 10);
+                    Camion camion = new Camion("Scania", "DGL234", diesel, 150, 12);
+                    Viajes viaje1 = new Viajes("San Salvador", "Perico", 35, diesel, auto, 5, true, 1950, 1915);
+                    
+                    //System.out.println("El costo del combustible seria de " + viaje1.calCostoCombustibles());
+                    viaje1.calCostoTotal();
+                    
                   
                    
                     break;
