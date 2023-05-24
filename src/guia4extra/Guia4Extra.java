@@ -7,6 +7,7 @@ package guia4extra;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.Period;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 
@@ -36,12 +37,24 @@ public class Guia4Extra {
                     Yate yate = new Yate(15, 100, "DJX380",50, LocalDate.now());
                     Lancha lancha = new Lancha(15, "DJX380",50, LocalDate.now());
                     Velero velero = new Velero(4, "DJX380", 50, LocalDate.now());
-                    Amarre amarre1 = new Amarre("La Niña", 30541575, LocalDate.parse("2023-05-15"), LocalDate.parse("2023-05-22"), 1, yate);
-                    Amarre amarre2 = new Amarre("La Pinta", 30541575, LocalDate.parse("2023-05-15"), LocalDate.parse("2023-05-22"), 2, lancha);
-                    Amarre amarre3 = new Amarre("La Santa Maria", 30541575, LocalDate.parse("2023-05-15"), LocalDate.parse("2023-05-22"), 3, velero);
+                    LocalDate hasta  = LocalDate.now(); // Fecha Actual
+                    Period periodo = Period.ofDays(10); // Periodode de 10 dias
+                    LocalDate desde = hasta.minus(periodo); // restandole a la fecha guardad en hasta los 10 dias cargados en periodo
+                    Amarre amarre1 = new Amarre("La Niña", 30541575, desde, hasta, 1, yate);
+                    Amarre amarre2 = new Amarre("La Pinta", 30541575, desde, hasta, 2, lancha);
+                    Amarre amarre3 = new Amarre("La Santa Maria", 30541575, desde, hasta, 3, velero);
                     System.out.println("El costo del Amarre"+ amarre1.getPosicion()+ " " + amarre1.getNombre() + " es de: " + yate.calculeAlquiler(amarre1.getDesde(), amarre1.getHasta()));
                     System.out.println("El costo del Amarre"+ amarre2.getPosicion()+ " " + amarre2.getNombre() + " es de: " + lancha.calculeAlquiler(amarre2.getDesde(), amarre2.getHasta()));
                     System.out.println("El costo del Amarre"+ amarre3.getPosicion()+ " " + amarre3.getNombre() + " es de: " + velero.calculeAlquiler(amarre3.getDesde(), amarre3.getHasta()));
+                      // Intente hacer funcional el codigo que me paso ChatGPT para ejecutar el contenido de un String como codigo JAVA
+                    /*
+                    String codigo = "System.out.println(\"El costo del Amarre\"+ amarre1.getPosicion()+ \" \" + amarre1.getNombre() + \" es de: \" + yate.calculeAlquiler(amarre1.getDesde(), amarre1.getHasta()));";
+                    try {
+                        Amarre.ejecutarCodigoJava(codigo,amarre1,yate);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    */
                     break;
                 case "2":
                     Combustible diesel = new Combustible("Infinia Diesel", 300);
@@ -54,7 +67,7 @@ public class Guia4Extra {
                     //System.out.println("El costo del combustible seria de " + viaje1.calCostoCombustibles());
                     viaje1.calCostoTotal();
                     
-                  
+                    
                    
                     break;
               

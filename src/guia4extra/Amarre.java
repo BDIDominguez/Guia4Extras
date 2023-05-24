@@ -6,7 +6,13 @@
 package guia4extra;
 
 import java.time.LocalDate;
-
+import javax.tools.JavaCompiler;
+import javax.tools.StandardJavaFileManager;
+import javax.tools.ToolProvider;
+import java.lang.reflect.Method;
+import java.net.URI;
+import java.util.Collections;
+import javax.tools.*;
 
 /**
  *
@@ -80,6 +86,47 @@ public class Amarre {
         this.barco = barco;
     }
     
-    
-    
+    // le pedi a chatGPT un codigo para poder ejecutar el contenido de un String como si fuera codigo JAVA pero no funciona como quiero XD
+    public static void ejecutarCodigoJava(String codigo,Amarre amarre1, Yate yate) throws Exception {
+        
+        System.out.println("" + codigo);
+        // Crear una clase temporal
+        String className = "TempClass";
+        String methodName = "tempMethod";
+        String classCode = "public class " + className + " { public static void " + methodName + "(Amarre amarre1, Yate yate) { " + codigo + " } }";
+        System.out.println(classCode);
+
+        // Compilar y cargar la clase
+        JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+        try (StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null)) {
+            JavaFileObject compilationUnit = new SimpleJavaFileObject(URI.create(className + ".java"), JavaFileObject.Kind.SOURCE) {
+                @Override
+                public CharSequence getCharContent(boolean ignoreEncodingErrors) {
+                    return classCode;
+                }
+            };
+            Iterable<? extends JavaFileObject> compilationUnits = Collections.singletonList(compilationUnit);
+            compiler.getTask(null, fileManager, null, null, null, compilationUnits).call();
+        }
+
+        // Ejecutar el método
+        Class<?> tempClass = Class.forName(className);
+        Method tempMethod = tempClass.getDeclaredMethod(methodName);
+        tempMethod.invoke(null);
+    }
+
 }
+
+/*
+public class Main {
+    public static void main(String[] args) {
+        String codigo = "System.out.println(\"Hola\");";
+
+        try {
+            MisMetodos.ejecutarCodigoJava(codigo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+*/
