@@ -48,7 +48,7 @@ public class Guia4Extra {
                     System.out.println("El costo del Amarre"+ amarre3.getPosicion()+ " " + amarre3.getNombre() + " es de: " + velero.calculeAlquiler(amarre3.getDesde(), amarre3.getHasta()));
                       // Intente hacer funcional el codigo que me paso ChatGPT para ejecutar el contenido de un String como codigo JAVA
                     /*
-                    String codigo = "System.out.println(\"El costo del Amarre\"+ amarre1.getPosicion()+ \" \" + amarre1.getNombre() + \" es de: \" + yate.calculeAlquiler(amarre1.getDesde(), amarre1.getHasta()));";
+                    String codigo = "System.out.println("El costo del");
                     try {
                         Amarre.ejecutarCodigoJava(codigo,amarre1,yate);
                     } catch (Exception e) {
